@@ -52,8 +52,8 @@ impl Aggregate for Reservation {
                 hotel_id,
                 room_type,
             } => {
-                self.hotel_id = hotel_id.clone();
-                self.room_type = room_type.clone();
+                self.hotel_id = hotel_id;
+                self.room_type = room_type;
                 self.reserved = true;
             }
             ReservationEvent::ReservationCancelled { .. } => {
@@ -105,12 +105,8 @@ mod aggregate_tests {
             hotel_id: "id".to_string(),
             room_type: "Queen".to_string(),
         };
-        let expected = ReservationEvent::ReservationCancelled {
-            hotel_id: "id".to_string(),
-        };
-        let command = ReservationCommand::CancelReservation {
-            hotel_id: "id".to_string(),
-        };
+        let expected = ReservationEvent::ReservationCancelled;
+        let command = ReservationCommand::CancelReservation;
 
         AccountTestFramework::with(())
             .given(vec![previous])
