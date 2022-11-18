@@ -1,0 +1,28 @@
+[package]
+name = "event-modeling-workshop-nov-2020"
+version = "0.0.0"
+authors = ["John Bledsoe"]
+edition = "2021"
+license = "Apache-2.0"
+keywords = ["cqrs", "event-sourcing", "sqlite"]
+description = "A demo application for cqrs-es and sqlite-es crates."
+repository = "https://github.com/johnbcodes/cqrs-es-demo-sqlite"
+readme = "README.md"
+publish = false
+
+[[bin]]
+name = "demo"
+path = "src/main.rs"
+
+[dependencies]
+async-trait = "0.1"
+axum = "0.5"
+cqrs-es = "0.4.5"
+serde = { version = "1.0", features = ["derive"]}
+serde_json = "1.0"
+sqlite-es = "0.4.5"
+sqlx = { version = "0.6", features = [ "postgres" , "runtime-tokio-rustls", "json"] }
+time = { version = "0.3", features = [ "formatting" ] }
+tokio = { version = "1", features = ["full"] }
+tower = "0.4"
+tower-http = "0.3"
