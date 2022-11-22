@@ -5,8 +5,8 @@ authors = ["John Bledsoe"]
 edition = "2021"
 license = "Apache-2.0"
 keywords = ["cqrs", "event-sourcing", "sqlite"]
-description = "A demo application for cqrs-es and sqlite-es crates."
-repository = "https://github.com/johnbcodes/cqrs-es-demo-sqlite"
+description = "Event Modeling workshop using axum, cqrs-es, and sqlite-es"
+repository = "https://github.com/johnbcodes/event-modeling-workshop-nov-2020"
 readme = "README.md"
 publish = false
 
