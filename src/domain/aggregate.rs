@@ -56,7 +56,7 @@ impl Aggregate for Reservation {
                 self.room_type = room_type;
                 self.reserved = true;
             }
-            ReservationEvent::ReservationCancelled { .. } => {
+            ReservationEvent::ReservationCancelled => {
                 self.reserved = false;
             }
         }

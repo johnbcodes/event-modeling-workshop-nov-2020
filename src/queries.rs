@@ -51,7 +51,7 @@ impl View<Reservation> for ReservationView {
                 self.room_type = room_type.clone();
                 self.reserved = true;
             }
-            ReservationEvent::ReservationCancelled { .. } => {
+            ReservationEvent::ReservationCancelled => {
                 self.reserved = false;
             }
         }

@@ -12,7 +12,7 @@ impl DomainEvent for ReservationEvent {
     fn event_type(&self) -> String {
         match self {
             ReservationEvent::ReservationMade { .. } => "ReservationMade".to_string(),
-            ReservationEvent::ReservationCancelled { .. } => "ReservationCancelled".to_string(),
+            ReservationEvent::ReservationCancelled => "ReservationCancelled".to_string(),
         }
     }
 
