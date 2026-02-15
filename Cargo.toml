@@ -2,7 +2,7 @@
 name = "event-modeling-workshop-nov-2020"
 version = "0.1.1"
 authors = ["John Bledsoe"]
-edition = "2021"
+edition = "2024"
 license = "Apache-2.0"
 keywords = ["cqrs", "event-sourcing", "sqlite"]
 description = "Event Modeling workshop using axum, cqrs-es, and sqlite-es"
