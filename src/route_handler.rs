@@ -1,10 +1,10 @@
 use crate::domain::commands::ReservationCommand;
 use crate::metadata_extractor::MetadataExtractor;
 use crate::state::ApplicationState;
+use axum::Json;
 use axum::extract::{Path, State};
 use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
-use axum::Json;
 use cqrs_es::persist::ViewRepository;
 
 // Serves as our query endpoint to respond with the materialized `BankAccountView`

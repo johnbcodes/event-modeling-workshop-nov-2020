@@ -1,7 +1,7 @@
 use crate::config::cqrs_framework;
 use crate::domain::aggregate::Reservation;
 use crate::queries::ReservationView;
-use sqlite_es::{default_sqlite_pool, SqliteCqrs, SqliteViewRepository};
+use sqlite_es::{SqliteCqrs, SqliteViewRepository, default_sqlite_pool};
 use std::sync::Arc;
 
 #[derive(Clone)]

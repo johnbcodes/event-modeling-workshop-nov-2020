@@ -4,8 +4,8 @@
 
 use crate::route_handler::{cancel_reservation_handler, make_reservation_handler, query_handler};
 use crate::state::new_application_state;
-use axum::routing::{get, post};
 use axum::Router;
+use axum::routing::{get, post};
 use tokio::net::TcpListener;
 
 mod config;
