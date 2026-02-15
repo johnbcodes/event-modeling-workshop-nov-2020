@@ -24,10 +24,10 @@ where
         let mut metadata = HashMap::default();
         metadata.insert("time".to_string(), time);
         metadata.insert("uri".to_string(), parts.uri.to_string());
-        if let Some(user_agent) = parts.headers.get(USER_AGENT_HDR) {
-            if let Ok(value) = user_agent.to_str() {
-                metadata.insert(USER_AGENT_HDR.to_string(), value.to_string());
-            }
+        if let Some(user_agent) = parts.headers.get(USER_AGENT_HDR)
+            && let Ok(value) = user_agent.to_str()
+        {
+            metadata.insert(USER_AGENT_HDR.to_string(), value.to_string());
         }
         Ok(MetadataExtractor(metadata))
     }
