@@ -1,5 +1,5 @@
-use async_trait::async_trait;
 use cqrs_es::Aggregate;
+use cqrs_es::event_sink::EventSink;
 use serde::{Deserialize, Serialize};
 
 use crate::domain::commands::ReservationCommand;
@@ -13,37 +13,37 @@ pub struct Reservation {
     reason: String,
 }
 
-#[async_trait]
 impl Aggregate for Reservation {
+
+	const TYPE: &'static str = "reservation";
     type Command = ReservationCommand;
     type Event = ReservationEvent;
     type Error = ReservationError;
     type Services = ();
 
-    // This identifier should be unique to the system.
-    fn aggregate_type() -> String {
-        "reservation".to_string()
-    }
-
     // The aggregate logic goes here. Note that this will be the _bulk_ of a CQRS system
     // so expect to use helper functions elsewhere to keep the code clean.
     async fn handle(
-        &self,
+        &mut self,
         command: Self::Command,
         _services: &Self::Services,
-    ) -> Result<Vec<Self::Event>, Self::Error> {
+		sink: &EventSink<Self>,
+    ) -> Result<(), Self::Error> {
         match command {
             ReservationCommand::MakeReservation {
                 hotel_id,
                 room_type,
-            } => Ok(vec![ReservationEvent::ReservationMade {
-                hotel_id,
-                room_type,
-            }]),
+            } => {
+				sink.write(ReservationEvent::ReservationMade {
+                	hotel_id,
+                	room_type,
+            	}, self).await;
+			}
             ReservationCommand::CancelReservation => {
-                Ok(vec![ReservationEvent::ReservationCancelled])
+				sink.write(ReservationEvent::ReservationCancelled, self).await;
             }
         }
+		Ok(())
     }
 
     fn apply(&mut self, event: Self::Event) {
