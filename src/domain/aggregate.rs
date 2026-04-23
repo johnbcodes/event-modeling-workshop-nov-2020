@@ -14,8 +14,7 @@ pub struct Reservation {
 }
 
 impl Aggregate for Reservation {
-
-	const TYPE: &'static str = "reservation";
+    const TYPE: &'static str = "reservation";
     type Command = ReservationCommand;
     type Event = ReservationEvent;
     type Error = ReservationError;
@@ -27,23 +26,28 @@ impl Aggregate for Reservation {
         &mut self,
         command: Self::Command,
         _services: &Self::Services,
-		sink: &EventSink<Self>,
+        sink: &EventSink<Self>,
     ) -> Result<(), Self::Error> {
         match command {
             ReservationCommand::MakeReservation {
                 hotel_id,
                 room_type,
             } => {
-				sink.write(ReservationEvent::ReservationMade {
-                	hotel_id,
-                	room_type,
-            	}, self).await;
-			}
+                sink.write(
+                    ReservationEvent::ReservationMade {
+                        hotel_id,
+                        room_type,
+                    },
+                    self,
+                )
+                .await;
+            }
             ReservationCommand::CancelReservation => {
-				sink.write(ReservationEvent::ReservationCancelled, self).await;
+                sink.write(ReservationEvent::ReservationCancelled, self)
+                    .await;
             }
         }
-		Ok(())
+        Ok(())
     }
 
     fn apply(&mut self, event: Self::Event) {
